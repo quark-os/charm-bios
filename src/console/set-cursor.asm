@@ -1,0 +1,7 @@
+setCursor:
+	PUSH BX
+	MOV BX, 0x000F
+	MOV AH, 0x02
+	INT 0x10
+	POP BX
+	RET

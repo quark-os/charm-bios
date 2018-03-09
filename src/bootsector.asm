@@ -10,9 +10,6 @@ org 0x7C00
 %define diskAccessLBAMid 0x50A
 %define diskAccessLBAHigh 0x50C
 
-; data macros (important constants)
-
-
 ; code
 
 ; set up the stack
@@ -85,12 +82,13 @@ load:
 MOV WORD [diskAccessBlockCount], 64
 MOV AX, [SI + 0x20]
 MOV [diskAccessLBALow], AX
-MOV BX, SI ;
-CALL print_bx ;
+MOV [0xFFF8], AX
 MOV AX, [SI + 0x22]
 MOV [diskAccessLBAMid], AX
+MOV [0xFFFA], AX
 MOV AX, [SI + 0x24]
 MOV [diskAccessLBAHigh], AX
+MOV [0xFFFC], AX
 MOV WORD [diskAccessSegment], 0x1000
 MOV WORD [diskAccessOffset], 0
 
@@ -98,13 +96,6 @@ MOV SI, diskAccessPacket
 MOV AH, 0x42
 MOV DL, 0x80
 INT 0x13
-
-MOV SI, boot_msg
-CALL print
-
-;MOV AX, 0x1000
-;MOV CS, AX
-;JMP 0x7C00
 
 JMP 0x1000:0
 

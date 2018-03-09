@@ -1,0 +1,24 @@
+clearRow:
+	PUSHA
+	
+	MOV BX, DX
+	MOV AH, 0x03
+	INT 0x10
+	PUSH DX
+	MOV DX, BX
+	
+	XOR DL, DL
+	MOV AH, 0x02
+	INT 0x10
+	MOV AL, ' '
+	MOV AH, 0x0A
+	MOV BX, 0x000F
+	MOV CX, 80
+	INT 0x10
+	
+	POP DX
+	MOV AH, 0x02
+	INT 0x10
+	
+	POPA
+	RET

@@ -1,0 +1,11 @@
+newline:
+	PUSH BX
+	MOV BX, 0x000F
+	MOV AH, 0x03
+	INT 0x10
+	INC DH
+	XOR DL, DL
+	MOV AH, 0x02
+	INT 0x10
+	POP BX
+	RET

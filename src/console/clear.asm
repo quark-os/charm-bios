@@ -1,0 +1,22 @@
+clear:
+	PUSH BX
+	MOV BX, 0x000F
+	XOR DX, DX
+	MOV AH, 0x02
+	INT 0x10
+	_clear_row:
+	MOV AL, ' '
+	MOV AH, 0x0A
+	MOV BX, 0x000F
+	MOV CX, 80
+	INT 0x10
+	INC DH
+	MOV AH, 0x02
+	INT 0x10
+	CMP DH, 25
+	JL _clear_row
+	XOR DX, DX
+	MOV AH, 0x02
+	INT 0x10
+	POP BX
+	RET
